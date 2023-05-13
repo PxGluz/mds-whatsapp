@@ -1,0 +1,11 @@
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\bin\Debug\mds-whatsapp.exe.config
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\bin\Debug\mds-whatsapp.exe
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\bin\Debug\mds-whatsapp.pdb
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\obj\Debug\mds-whatsapp.csproj.AssemblyReference.cache
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\obj\Debug\mds-whatsapp.csproj.SuggestedBindingRedirects.cache
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\obj\Debug\mds_whatsapp.Form1.resources
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\obj\Debug\mds_whatsapp.Properties.Resources.resources
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\obj\Debug\mds-whatsapp.csproj.GenerateResource.cache
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\obj\Debug\mds-whatsapp.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\obj\Debug\mds-whatsapp.exe
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\obj\Debug\mds-whatsapp.pdb
