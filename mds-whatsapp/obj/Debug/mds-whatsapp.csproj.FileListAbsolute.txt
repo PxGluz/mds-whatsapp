@@ -9,3 +9,12 @@ C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\obj\Debug\mds-whatsapp.cspr
 C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\obj\Debug\mds-whatsapp.csproj.CoreCompileInputs.cache
 C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\obj\Debug\mds-whatsapp.exe
 C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\obj\Debug\mds-whatsapp.pdb
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\bin\Debug\EntityFramework.dll
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\bin\Debug\Microsoft.Configuration.ConfigurationBuilders.Base.dll
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\bin\Debug\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.dll
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\bin\Debug\EntityFramework.xml
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\bin\Debug\Microsoft.Configuration.ConfigurationBuilders.Base.xml
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\bin\Debug\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.xml
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\obj\Debug\mds-whatsapp.csproj.CopyComplete

@@ -379,7 +379,7 @@ namespace mds_whatsapp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public MessageRow AddMessageRow(string Message, string Sender, System.DateTime Time) {
+            public MessageRow AddMessageRow(string Message, string Sender, int Time) {
                 MessageRow rowMessageRow = ((MessageRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Message,
@@ -419,7 +419,7 @@ namespace mds_whatsapp {
                 base.Columns.Add(this.columnMessage);
                 this.columnSender = new global::System.Data.DataColumn("Sender", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSender);
-                this.columnTime = new global::System.Data.DataColumn("Time", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this.columnTime = new global::System.Data.DataColumn("Time", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTime);
                 this.columnMessage.AllowDBNull = false;
                 this.columnMessage.MaxLength = 50;
@@ -590,9 +590,9 @@ namespace mds_whatsapp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public System.DateTime Time {
+            public int Time {
                 get {
-                    return ((global::System.DateTime)(this[this.tableMessage.TimeColumn]));
+                    return ((int)(this[this.tableMessage.TimeColumn]));
                 }
                 set {
                     this[this.tableMessage.TimeColumn] = value;
@@ -770,7 +770,7 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Message", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Message", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Sender", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Sender", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Time", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Time", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Time", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Time", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -847,7 +847,7 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string Message, string Sender, System.DateTime Time) {
+        public virtual int Insert(string Message, string Sender, int Time) {
             if ((Message == null)) {
                 throw new global::System.ArgumentNullException("Message");
             }
@@ -860,7 +860,7 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
             else {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((string)(Sender));
             }
-            this.Adapter.InsertCommand.Parameters[2].Value = ((System.DateTime)(Time));
+            this.Adapter.InsertCommand.Parameters[2].Value = Time;
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {

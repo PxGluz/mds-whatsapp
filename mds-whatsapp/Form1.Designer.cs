@@ -39,7 +39,14 @@ namespace mds_whatsapp
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.button2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.messageBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this._mds_whatsappDataSet = new mds_whatsapp._mds_whatsappDataSet();
+            this.messageTableAdapter = new mds_whatsapp._mds_whatsappDataSetTableAdapters.MessageTableAdapter();
+            this.tableAdapterManager = new mds_whatsapp._mds_whatsappDataSetTableAdapters.TableAdapterManager();
+            this.button3 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.messageBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._mds_whatsappDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -86,11 +93,42 @@ namespace mds_whatsapp
             // panel2
             // 
             this.panel2.AutoScroll = true;
+            this.panel2.Controls.Add(this.button3);
             this.panel2.Controls.Add(this.button2);
             this.panel2.Location = new System.Drawing.Point(12, 12);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(114, 354);
             this.panel2.TabIndex = 3;
+            // 
+            // messageBindingSource
+            // 
+            this.messageBindingSource.DataMember = "Message";
+            this.messageBindingSource.DataSource = this._mds_whatsappDataSet;
+            // 
+            // _mds_whatsappDataSet
+            // 
+            this._mds_whatsappDataSet.DataSetName = "_mds_whatsappDataSet";
+            this._mds_whatsappDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // messageTableAdapter
+            // 
+            this.messageTableAdapter.ClearBeforeFill = true;
+            // 
+            // tableAdapterManager
+            // 
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.MessageTableAdapter = this.messageTableAdapter;
+            this.tableAdapterManager.UpdateOrder = mds_whatsapp._mds_whatsappDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(18, 266);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(80, 28);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "Load";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.load_conversation);
             // 
             // Form1
             // 
@@ -106,6 +144,8 @@ namespace mds_whatsapp
             this.Text = "Whatsapp";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.messageBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._mds_whatsappDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,6 +160,11 @@ namespace mds_whatsapp
         private ContextMenuStrip contextMenuStrip1;
         private Button button2;
         private Panel panel2;
+        private _mds_whatsappDataSet _mds_whatsappDataSet;
+        private BindingSource messageBindingSource;
+        private _mds_whatsappDataSetTableAdapters.MessageTableAdapter messageTableAdapter;
+        private _mds_whatsappDataSetTableAdapters.TableAdapterManager tableAdapterManager;
+        private Button button3;
     }
 }
 

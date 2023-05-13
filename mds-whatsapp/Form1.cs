@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -18,13 +19,14 @@ namespace mds_whatsapp
             InitializeComponent();
         }
 
+        SqlConnection con = new SqlConnection(@"");
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (this.textBox.Text != "")
             {
                 RichTextBox message = new RichTextBox();
                 message.Text = this.textBox.Text;
-                //message.Text = this.textBox.Text;
                 int yPos = messageList.Count() > 0 ? messageList[messageList.Count() - 1].Location.Y + messageList[messageList.Count() - 1].Size.Height + 5 : 12;
                 message.Location = new System.Drawing.Point(350 - TextRenderer.MeasureText(message.Text, message.Font).Width, yPos);
                 message.Name = $"richTextBox{messageList.Count()}";
@@ -34,6 +36,7 @@ namespace mds_whatsapp
                 messageList.Add(message);
                 panel1.Controls.Add(message);
                 this.textBox.Text = "";
+                messageTableAdapter.Insert(message.Text, "", 0);
             }
         }
 
@@ -54,7 +57,34 @@ namespace mds_whatsapp
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the '_mds_whatsappDataSet.Message' table. You can move, or remove it, as needed.
+            this.messageTableAdapter.Fill(this._mds_whatsappDataSet.Message);
+        }
 
+        private void messageBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.messageBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this._mds_whatsappDataSet);
+
+        }
+
+        private void load_conversation(object sender, EventArgs e)
+        {
+            foreach (DataRow row in messageTableAdapter.GetData().Rows)
+            {
+                RichTextBox message = new RichTextBox();
+                message.Text = row.ItemArray[0].ToString();
+                int yPos = messageList.Count() > 0 ? messageList[messageList.Count() - 1].Location.Y + messageList[messageList.Count() - 1].Size.Height + 5 : 12;
+                message.Location = new System.Drawing.Point(350 - TextRenderer.MeasureText(message.Text, message.Font).Width, yPos);
+                message.Name = $"richTextBox{messageList.Count()}";
+                message.Size = new System.Drawing.Size(TextRenderer.MeasureText(message.Text, message.Font).Width, 28);
+                message.TabIndex = 2;
+                message.ReadOnly = true;
+                messageList.Add(message);
+                panel1.Controls.Add(message);
+                this.textBox.Text = "";
+            }
         }
     }
 }
