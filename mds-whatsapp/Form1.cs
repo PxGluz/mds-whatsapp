@@ -36,7 +36,7 @@ namespace mds_whatsapp
                 messageList.Add(message);
                 panel1.Controls.Add(message);
                 this.textBox.Text = "";
-                messageTableAdapter.Insert(message.Text, "", 0);
+                //messageTableAdapter.Insert(message.Text, "", 0);
             }
         }
 
@@ -58,7 +58,8 @@ namespace mds_whatsapp
         private void Form1_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the '_mds_whatsappDataSet.Message' table. You can move, or remove it, as needed.
-            this.messageTableAdapter.Fill(this._mds_whatsappDataSet.Message);
+            this.messageTableAdapter.Fill(this._mds_whatsappDataSet.MESSAGES);
+            this.userTableAdapter.Fill(this._mds_whatsappDataSet.USERS);
         }
 
         private void messageBindingNavigatorSaveItem_Click(object sender, EventArgs e)
@@ -71,7 +72,7 @@ namespace mds_whatsapp
 
         private void load_conversation(object sender, EventArgs e)
         {
-            foreach (DataRow row in messageTableAdapter.GetData().Rows)
+            /*foreach (DataRow row in messageTableAdapter.GetData().Rows)
             {
                 RichTextBox message = new RichTextBox();
                 message.Text = row.ItemArray[0].ToString();
@@ -84,7 +85,7 @@ namespace mds_whatsapp
                 messageList.Add(message);
                 panel1.Controls.Add(message);
                 this.textBox.Text = "";
-            }
+            }*/
         }
     }
 }

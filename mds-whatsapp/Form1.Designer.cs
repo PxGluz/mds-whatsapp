@@ -41,7 +41,8 @@ namespace mds_whatsapp
             this.panel2 = new System.Windows.Forms.Panel();
             this.messageBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this._mds_whatsappDataSet = new mds_whatsapp._mds_whatsappDataSet();
-            this.messageTableAdapter = new mds_whatsapp._mds_whatsappDataSetTableAdapters.MessageTableAdapter();
+            this.messageTableAdapter = new mds_whatsapp._mds_whatsappDataSetTableAdapters.MESSAGESTableAdapter();
+            this.userTableAdapter = new mds_whatsapp._mds_whatsappDataSetTableAdapters.USERSTableAdapter();
             this.tableAdapterManager = new mds_whatsapp._mds_whatsappDataSetTableAdapters.TableAdapterManager();
             this.button3 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
@@ -113,11 +114,13 @@ namespace mds_whatsapp
             // messageTableAdapter
             // 
             this.messageTableAdapter.ClearBeforeFill = true;
+            this.userTableAdapter.ClearBeforeFill = true;
             // 
             // tableAdapterManager
             // 
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.MessageTableAdapter = this.messageTableAdapter;
+            this.tableAdapterManager.MESSAGESTableAdapter = this.messageTableAdapter;
+            this.tableAdapterManager.USERSTableAdapter = this.userTableAdapter;
             this.tableAdapterManager.UpdateOrder = mds_whatsapp._mds_whatsappDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // button3
@@ -162,7 +165,8 @@ namespace mds_whatsapp
         private Panel panel2;
         private _mds_whatsappDataSet _mds_whatsappDataSet;
         private BindingSource messageBindingSource;
-        private _mds_whatsappDataSetTableAdapters.MessageTableAdapter messageTableAdapter;
+        private _mds_whatsappDataSetTableAdapters.MESSAGESTableAdapter messageTableAdapter;
+        private _mds_whatsappDataSetTableAdapters.USERSTableAdapter userTableAdapter;
         private _mds_whatsappDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private Button button3;
     }

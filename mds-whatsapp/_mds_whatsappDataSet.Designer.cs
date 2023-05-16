@@ -24,7 +24,13 @@ namespace mds_whatsapp {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class _mds_whatsappDataSet : global::System.Data.DataSet {
         
-        private MessageDataTable tableMessage;
+        private MESSAGESDataTable tableMESSAGES;
+        
+        private USERSDataTable tableUSERS;
+        
+        private global::System.Data.DataRelation relationFK_MESSAGES_RECEIVER;
+        
+        private global::System.Data.DataRelation relationFK_MESSAGES_SENDER;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -54,8 +60,11 @@ namespace mds_whatsapp {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["Message"] != null)) {
-                    base.Tables.Add(new MessageDataTable(ds.Tables["Message"]));
+                if ((ds.Tables["MESSAGES"] != null)) {
+                    base.Tables.Add(new MESSAGESDataTable(ds.Tables["MESSAGES"]));
+                }
+                if ((ds.Tables["USERS"] != null)) {
+                    base.Tables.Add(new USERSDataTable(ds.Tables["USERS"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +88,19 @@ namespace mds_whatsapp {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public MessageDataTable Message {
+        public MESSAGESDataTable MESSAGES {
             get {
-                return this.tableMessage;
+                return this.tableMESSAGES;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public USERSDataTable USERS {
+            get {
+                return this.tableUSERS;
             }
         }
         
@@ -152,8 +171,11 @@ namespace mds_whatsapp {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["Message"] != null)) {
-                    base.Tables.Add(new MessageDataTable(ds.Tables["Message"]));
+                if ((ds.Tables["MESSAGES"] != null)) {
+                    base.Tables.Add(new MESSAGESDataTable(ds.Tables["MESSAGES"]));
+                }
+                if ((ds.Tables["USERS"] != null)) {
+                    base.Tables.Add(new USERSDataTable(ds.Tables["USERS"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,12 +210,20 @@ namespace mds_whatsapp {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableMessage = ((MessageDataTable)(base.Tables["Message"]));
+            this.tableMESSAGES = ((MESSAGESDataTable)(base.Tables["MESSAGES"]));
             if ((initTable == true)) {
-                if ((this.tableMessage != null)) {
-                    this.tableMessage.InitVars();
+                if ((this.tableMESSAGES != null)) {
+                    this.tableMESSAGES.InitVars();
                 }
             }
+            this.tableUSERS = ((USERSDataTable)(base.Tables["USERS"]));
+            if ((initTable == true)) {
+                if ((this.tableUSERS != null)) {
+                    this.tableUSERS.InitVars();
+                }
+            }
+            this.relationFK_MESSAGES_RECEIVER = this.Relations["FK_MESSAGES_RECEIVER"];
+            this.relationFK_MESSAGES_SENDER = this.Relations["FK_MESSAGES_SENDER"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -204,13 +234,29 @@ namespace mds_whatsapp {
             this.Namespace = "http://tempuri.org/_mds_whatsappDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableMessage = new MessageDataTable();
-            base.Tables.Add(this.tableMessage);
+            this.tableMESSAGES = new MESSAGESDataTable();
+            base.Tables.Add(this.tableMESSAGES);
+            this.tableUSERS = new USERSDataTable();
+            base.Tables.Add(this.tableUSERS);
+            this.relationFK_MESSAGES_RECEIVER = new global::System.Data.DataRelation("FK_MESSAGES_RECEIVER", new global::System.Data.DataColumn[] {
+                        this.tableUSERS.user_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableMESSAGES.receiver_idColumn}, false);
+            this.Relations.Add(this.relationFK_MESSAGES_RECEIVER);
+            this.relationFK_MESSAGES_SENDER = new global::System.Data.DataRelation("FK_MESSAGES_SENDER", new global::System.Data.DataColumn[] {
+                        this.tableUSERS.user_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableMESSAGES.sender_idColumn}, false);
+            this.Relations.Add(this.relationFK_MESSAGES_SENDER);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        private bool ShouldSerializeMessage() {
+        private bool ShouldSerializeMESSAGES() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializeUSERS() {
             return false;
         }
         
@@ -270,25 +316,32 @@ namespace mds_whatsapp {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public delegate void MessageRowChangeEventHandler(object sender, MessageRowChangeEvent e);
+        public delegate void MESSAGESRowChangeEventHandler(object sender, MESSAGESRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void USERSRowChangeEventHandler(object sender, USERSRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class MessageDataTable : global::System.Data.TypedTableBase<MessageRow> {
+        public partial class MESSAGESDataTable : global::System.Data.TypedTableBase<MESSAGESRow> {
             
-            private global::System.Data.DataColumn columnMessage;
+            private global::System.Data.DataColumn columnmessage_id;
             
-            private global::System.Data.DataColumn columnSender;
+            private global::System.Data.DataColumn columnreceiver_id;
             
-            private global::System.Data.DataColumn columnTime;
+            private global::System.Data.DataColumn columnsender_id;
+            
+            private global::System.Data.DataColumn columnmessage_content;
+            
+            private global::System.Data.DataColumn columntime;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public MessageDataTable() {
-                this.TableName = "Message";
+            public MESSAGESDataTable() {
+                this.TableName = "MESSAGES";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -296,7 +349,7 @@ namespace mds_whatsapp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            internal MessageDataTable(global::System.Data.DataTable table) {
+            internal MESSAGESDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -313,32 +366,48 @@ namespace mds_whatsapp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            protected MessageDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected MESSAGESDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn MessageColumn {
+            public global::System.Data.DataColumn message_idColumn {
                 get {
-                    return this.columnMessage;
+                    return this.columnmessage_id;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn SenderColumn {
+            public global::System.Data.DataColumn receiver_idColumn {
                 get {
-                    return this.columnSender;
+                    return this.columnreceiver_id;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn TimeColumn {
+            public global::System.Data.DataColumn sender_idColumn {
                 get {
-                    return this.columnTime;
+                    return this.columnsender_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn message_contentColumn {
+                get {
+                    return this.columnmessage_content;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn timeColumn {
+                get {
+                    return this.columntime;
                 }
             }
             
@@ -353,47 +422,62 @@ namespace mds_whatsapp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public MessageRow this[int index] {
+            public MESSAGESRow this[int index] {
                 get {
-                    return ((MessageRow)(this.Rows[index]));
+                    return ((MESSAGESRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event MessageRowChangeEventHandler MessageRowChanging;
+            public event MESSAGESRowChangeEventHandler MESSAGESRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event MessageRowChangeEventHandler MessageRowChanged;
+            public event MESSAGESRowChangeEventHandler MESSAGESRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event MessageRowChangeEventHandler MessageRowDeleting;
+            public event MESSAGESRowChangeEventHandler MESSAGESRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public event MessageRowChangeEventHandler MessageRowDeleted;
+            public event MESSAGESRowChangeEventHandler MESSAGESRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void AddMessageRow(MessageRow row) {
+            public void AddMESSAGESRow(MESSAGESRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public MessageRow AddMessageRow(string Message, string Sender, int Time) {
-                MessageRow rowMessageRow = ((MessageRow)(this.NewRow()));
+            public MESSAGESRow AddMESSAGESRow(long message_id, USERSRow parentUSERSRowByFK_MESSAGES_RECEIVER, USERSRow parentUSERSRowByFK_MESSAGES_SENDER, string message_content, System.TimeSpan time) {
+                MESSAGESRow rowMESSAGESRow = ((MESSAGESRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        Message,
-                        Sender,
-                        Time};
-                rowMessageRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowMessageRow);
-                return rowMessageRow;
+                        message_id,
+                        null,
+                        null,
+                        message_content,
+                        time};
+                if ((parentUSERSRowByFK_MESSAGES_RECEIVER != null)) {
+                    columnValuesArray[1] = parentUSERSRowByFK_MESSAGES_RECEIVER[0];
+                }
+                if ((parentUSERSRowByFK_MESSAGES_SENDER != null)) {
+                    columnValuesArray[2] = parentUSERSRowByFK_MESSAGES_SENDER[0];
+                }
+                rowMESSAGESRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowMESSAGESRow);
+                return rowMESSAGESRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public MESSAGESRow FindBymessage_id(long message_id) {
+                return ((MESSAGESRow)(this.Rows.Find(new object[] {
+                            message_id})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                MessageDataTable cln = ((MessageDataTable)(base.Clone()));
+                MESSAGESDataTable cln = ((MESSAGESDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -401,57 +485,67 @@ namespace mds_whatsapp {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new MessageDataTable();
+                return new MESSAGESDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
-                this.columnMessage = base.Columns["Message"];
-                this.columnSender = base.Columns["Sender"];
-                this.columnTime = base.Columns["Time"];
+                this.columnmessage_id = base.Columns["message_id"];
+                this.columnreceiver_id = base.Columns["receiver_id"];
+                this.columnsender_id = base.Columns["sender_id"];
+                this.columnmessage_content = base.Columns["message_content"];
+                this.columntime = base.Columns["time"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             private void InitClass() {
-                this.columnMessage = new global::System.Data.DataColumn("Message", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMessage);
-                this.columnSender = new global::System.Data.DataColumn("Sender", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSender);
-                this.columnTime = new global::System.Data.DataColumn("Time", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTime);
-                this.columnMessage.AllowDBNull = false;
-                this.columnMessage.MaxLength = 50;
-                this.columnSender.AllowDBNull = false;
-                this.columnSender.MaxLength = 50;
-                this.columnTime.AllowDBNull = false;
+                this.columnmessage_id = new global::System.Data.DataColumn("message_id", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmessage_id);
+                this.columnreceiver_id = new global::System.Data.DataColumn("receiver_id", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnreceiver_id);
+                this.columnsender_id = new global::System.Data.DataColumn("sender_id", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsender_id);
+                this.columnmessage_content = new global::System.Data.DataColumn("message_content", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmessage_content);
+                this.columntime = new global::System.Data.DataColumn("time", typeof(global::System.TimeSpan), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntime);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnmessage_id}, true));
+                this.columnmessage_id.AllowDBNull = false;
+                this.columnmessage_id.Unique = true;
+                this.columnreceiver_id.AllowDBNull = false;
+                this.columnsender_id.AllowDBNull = false;
+                this.columnmessage_content.AllowDBNull = false;
+                this.columnmessage_content.MaxLength = 50;
+                this.columntime.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public MessageRow NewMessageRow() {
-                return ((MessageRow)(this.NewRow()));
+            public MESSAGESRow NewMESSAGESRow() {
+                return ((MESSAGESRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new MessageRow(builder);
+                return new MESSAGESRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(MessageRow);
+                return typeof(MESSAGESRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.MessageRowChanged != null)) {
-                    this.MessageRowChanged(this, new MessageRowChangeEvent(((MessageRow)(e.Row)), e.Action));
+                if ((this.MESSAGESRowChanged != null)) {
+                    this.MESSAGESRowChanged(this, new MESSAGESRowChangeEvent(((MESSAGESRow)(e.Row)), e.Action));
                 }
             }
             
@@ -459,8 +553,8 @@ namespace mds_whatsapp {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.MessageRowChanging != null)) {
-                    this.MessageRowChanging(this, new MessageRowChangeEvent(((MessageRow)(e.Row)), e.Action));
+                if ((this.MESSAGESRowChanging != null)) {
+                    this.MESSAGESRowChanging(this, new MESSAGESRowChangeEvent(((MESSAGESRow)(e.Row)), e.Action));
                 }
             }
             
@@ -468,8 +562,8 @@ namespace mds_whatsapp {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.MessageRowDeleted != null)) {
-                    this.MessageRowDeleted(this, new MessageRowChangeEvent(((MessageRow)(e.Row)), e.Action));
+                if ((this.MESSAGESRowDeleted != null)) {
+                    this.MESSAGESRowDeleted(this, new MESSAGESRowChangeEvent(((MESSAGESRow)(e.Row)), e.Action));
                 }
             }
             
@@ -477,14 +571,14 @@ namespace mds_whatsapp {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.MessageRowDeleting != null)) {
-                    this.MessageRowDeleting(this, new MessageRowChangeEvent(((MessageRow)(e.Row)), e.Action));
+                if ((this.MESSAGESRowDeleting != null)) {
+                    this.MESSAGESRowDeleting(this, new MESSAGESRowChangeEvent(((MESSAGESRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void RemoveMessageRow(MessageRow row) {
+            public void RemoveMESSAGESRow(MESSAGESRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -511,7 +605,313 @@ namespace mds_whatsapp {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "MessageDataTable";
+                attribute2.FixedValue = "MESSAGESDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class USERSDataTable : global::System.Data.TypedTableBase<USERSRow> {
+            
+            private global::System.Data.DataColumn columnuser_id;
+            
+            private global::System.Data.DataColumn columndisplay_name;
+            
+            private global::System.Data.DataColumn columnusername;
+            
+            private global::System.Data.DataColumn columnpassword;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public USERSDataTable() {
+                this.TableName = "USERS";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal USERSDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected USERSDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn user_idColumn {
+                get {
+                    return this.columnuser_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn display_nameColumn {
+                get {
+                    return this.columndisplay_name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn usernameColumn {
+                get {
+                    return this.columnusername;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn passwordColumn {
+                get {
+                    return this.columnpassword;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public USERSRow this[int index] {
+                get {
+                    return ((USERSRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event USERSRowChangeEventHandler USERSRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event USERSRowChangeEventHandler USERSRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event USERSRowChangeEventHandler USERSRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event USERSRowChangeEventHandler USERSRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddUSERSRow(USERSRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public USERSRow AddUSERSRow(long user_id, string display_name, string username, string password) {
+                USERSRow rowUSERSRow = ((USERSRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        user_id,
+                        display_name,
+                        username,
+                        password};
+                rowUSERSRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowUSERSRow);
+                return rowUSERSRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public USERSRow FindByuser_id(long user_id) {
+                return ((USERSRow)(this.Rows.Find(new object[] {
+                            user_id})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                USERSDataTable cln = ((USERSDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new USERSDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnuser_id = base.Columns["user_id"];
+                this.columndisplay_name = base.Columns["display_name"];
+                this.columnusername = base.Columns["username"];
+                this.columnpassword = base.Columns["password"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnuser_id = new global::System.Data.DataColumn("user_id", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnuser_id);
+                this.columndisplay_name = new global::System.Data.DataColumn("display_name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndisplay_name);
+                this.columnusername = new global::System.Data.DataColumn("username", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnusername);
+                this.columnpassword = new global::System.Data.DataColumn("password", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpassword);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnuser_id}, true));
+                this.columnuser_id.AllowDBNull = false;
+                this.columnuser_id.Unique = true;
+                this.columndisplay_name.AllowDBNull = false;
+                this.columndisplay_name.MaxLength = 50;
+                this.columnusername.AllowDBNull = false;
+                this.columnusername.MaxLength = 50;
+                this.columnpassword.AllowDBNull = false;
+                this.columnpassword.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public USERSRow NewUSERSRow() {
+                return ((USERSRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new USERSRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(USERSRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.USERSRowChanged != null)) {
+                    this.USERSRowChanged(this, new USERSRowChangeEvent(((USERSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.USERSRowChanging != null)) {
+                    this.USERSRowChanging(this, new USERSRowChangeEvent(((USERSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.USERSRowDeleted != null)) {
+                    this.USERSRowDeleted(this, new USERSRowChangeEvent(((USERSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.USERSRowDeleting != null)) {
+                    this.USERSRowDeleting(this, new USERSRowChangeEvent(((USERSRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemoveUSERSRow(USERSRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                _mds_whatsappDataSet ds = new _mds_whatsappDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "USERSDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -555,47 +955,172 @@ namespace mds_whatsapp {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class MessageRow : global::System.Data.DataRow {
+        public partial class MESSAGESRow : global::System.Data.DataRow {
             
-            private MessageDataTable tableMessage;
+            private MESSAGESDataTable tableMESSAGES;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            internal MessageRow(global::System.Data.DataRowBuilder rb) : 
+            internal MESSAGESRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableMessage = ((MessageDataTable)(this.Table));
+                this.tableMESSAGES = ((MESSAGESDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Message {
+            public long message_id {
                 get {
-                    return ((string)(this[this.tableMessage.MessageColumn]));
+                    return ((long)(this[this.tableMESSAGES.message_idColumn]));
                 }
                 set {
-                    this[this.tableMessage.MessageColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Sender {
-                get {
-                    return ((string)(this[this.tableMessage.SenderColumn]));
-                }
-                set {
-                    this[this.tableMessage.SenderColumn] = value;
+                    this[this.tableMESSAGES.message_idColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public int Time {
+            public long receiver_id {
                 get {
-                    return ((int)(this[this.tableMessage.TimeColumn]));
+                    return ((long)(this[this.tableMESSAGES.receiver_idColumn]));
                 }
                 set {
-                    this[this.tableMessage.TimeColumn] = value;
+                    this[this.tableMESSAGES.receiver_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public long sender_id {
+                get {
+                    return ((long)(this[this.tableMESSAGES.sender_idColumn]));
+                }
+                set {
+                    this[this.tableMESSAGES.sender_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string message_content {
+                get {
+                    return ((string)(this[this.tableMESSAGES.message_contentColumn]));
+                }
+                set {
+                    this[this.tableMESSAGES.message_contentColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public System.TimeSpan time {
+                get {
+                    return ((global::System.TimeSpan)(this[this.tableMESSAGES.timeColumn]));
+                }
+                set {
+                    this[this.tableMESSAGES.timeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public USERSRow USERSRowByFK_MESSAGES_RECEIVER {
+                get {
+                    return ((USERSRow)(this.GetParentRow(this.Table.ParentRelations["FK_MESSAGES_RECEIVER"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_MESSAGES_RECEIVER"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public USERSRow USERSRowByFK_MESSAGES_SENDER {
+                get {
+                    return ((USERSRow)(this.GetParentRow(this.Table.ParentRelations["FK_MESSAGES_SENDER"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_MESSAGES_SENDER"]);
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class USERSRow : global::System.Data.DataRow {
+            
+            private USERSDataTable tableUSERS;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal USERSRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableUSERS = ((USERSDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public long user_id {
+                get {
+                    return ((long)(this[this.tableUSERS.user_idColumn]));
+                }
+                set {
+                    this[this.tableUSERS.user_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string display_name {
+                get {
+                    return ((string)(this[this.tableUSERS.display_nameColumn]));
+                }
+                set {
+                    this[this.tableUSERS.display_nameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string username {
+                get {
+                    return ((string)(this[this.tableUSERS.usernameColumn]));
+                }
+                set {
+                    this[this.tableUSERS.usernameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string password {
+                get {
+                    return ((string)(this[this.tableUSERS.passwordColumn]));
+                }
+                set {
+                    this[this.tableUSERS.passwordColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public MESSAGESRow[] GetMESSAGESRowsByFK_MESSAGES_RECEIVER() {
+                if ((this.Table.ChildRelations["FK_MESSAGES_RECEIVER"] == null)) {
+                    return new MESSAGESRow[0];
+                }
+                else {
+                    return ((MESSAGESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_MESSAGES_RECEIVER"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public MESSAGESRow[] GetMESSAGESRowsByFK_MESSAGES_SENDER() {
+                if ((this.Table.ChildRelations["FK_MESSAGES_SENDER"] == null)) {
+                    return new MESSAGESRow[0];
+                }
+                else {
+                    return ((MESSAGESRow[])(base.GetChildRows(this.Table.ChildRelations["FK_MESSAGES_SENDER"])));
                 }
             }
         }
@@ -604,22 +1129,56 @@ namespace mds_whatsapp {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public class MessageRowChangeEvent : global::System.EventArgs {
+        public class MESSAGESRowChangeEvent : global::System.EventArgs {
             
-            private MessageRow eventRow;
+            private MESSAGESRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public MessageRowChangeEvent(MessageRow row, global::System.Data.DataRowAction action) {
+            public MESSAGESRowChangeEvent(MESSAGESRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public MessageRow Row {
+            public MESSAGESRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class USERSRowChangeEvent : global::System.EventArgs {
+            
+            private USERSRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public USERSRowChangeEvent(USERSRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public USERSRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -647,7 +1206,7 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class MessageTableAdapter : global::System.ComponentModel.Component {
+    public partial class MESSAGESTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
@@ -661,7 +1220,7 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public MessageTableAdapter() {
+        public MESSAGESTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -758,19 +1317,49 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
             this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "Message";
-            tableMapping.ColumnMappings.Add("Message", "Message");
-            tableMapping.ColumnMappings.Add("Sender", "Sender");
-            tableMapping.ColumnMappings.Add("Time", "Time");
+            tableMapping.DataSetTable = "MESSAGES";
+            tableMapping.ColumnMappings.Add("message_id", "message_id");
+            tableMapping.ColumnMappings.Add("receiver_id", "receiver_id");
+            tableMapping.ColumnMappings.Add("sender_id", "sender_id");
+            tableMapping.ColumnMappings.Add("message_content", "message_content");
+            tableMapping.ColumnMappings.Add("time", "time");
             this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[MESSAGES] WHERE (([message_id] = @Original_message_id) AND ([r" +
+                "eceiver_id] = @Original_receiver_id) AND ([sender_id] = @Original_sender_id) AND" +
+                " ([message_content] = @Original_message_content) AND ([time] = @Original_time))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_message_id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "message_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_receiver_id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "receiver_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_sender_id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sender_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_message_content", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "message_content", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_time", global::System.Data.SqlDbType.Time, 0, global::System.Data.ParameterDirection.Input, 0, 0, "time", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Message] ([Message], [Sender], [Time]) VALUES (@Message, @Send" +
-                "er, @Time)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[MESSAGES] ([message_id], [receiver_id], [sender_id], [message_content], [time]) VALUES (@message_id, @receiver_id, @sender_id, @message_content, @time);
+SELECT message_id, receiver_id, sender_id, message_content, time FROM MESSAGES WHERE (message_id = @message_id)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Message", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Message", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Sender", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Sender", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Time", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Time", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@message_id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "message_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@receiver_id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "receiver_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sender_id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sender_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@message_content", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "message_content", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@time", global::System.Data.SqlDbType.Time, 0, global::System.Data.ParameterDirection.Input, 0, 0, "time", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[MESSAGES] SET [message_id] = @message_id, [receiver_id] = @receiver_id, [sender_id] = @sender_id, [message_content] = @message_content, [time] = @time WHERE (([message_id] = @Original_message_id) AND ([receiver_id] = @Original_receiver_id) AND ([sender_id] = @Original_sender_id) AND ([message_content] = @Original_message_content) AND ([time] = @Original_time));
+SELECT message_id, receiver_id, sender_id, message_content, time FROM MESSAGES WHERE (message_id = @message_id)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@message_id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "message_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@receiver_id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "receiver_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sender_id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sender_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@message_content", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "message_content", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@time", global::System.Data.SqlDbType.Time, 0, global::System.Data.ParameterDirection.Input, 0, 0, "time", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_message_id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "message_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_receiver_id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "receiver_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_sender_id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sender_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_message_content", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "message_content", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_time", global::System.Data.SqlDbType.Time, 0, global::System.Data.ParameterDirection.Input, 0, 0, "time", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -786,7 +1375,8 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Message, Sender, Time FROM dbo.Message";
+            this._commandCollection[0].CommandText = "SELECT message_id, receiver_id, sender_id, message_content, time FROM dbo.MESSAGE" +
+                "S";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -794,7 +1384,7 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(_mds_whatsappDataSet.MessageDataTable dataTable) {
+        public virtual int Fill(_mds_whatsappDataSet.MESSAGESDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -807,9 +1397,9 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual _mds_whatsappDataSet.MessageDataTable GetData() {
+        public virtual _mds_whatsappDataSet.MESSAGESDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            _mds_whatsappDataSet.MessageDataTable dataTable = new _mds_whatsappDataSet.MessageDataTable();
+            _mds_whatsappDataSet.MESSAGESDataTable dataTable = new _mds_whatsappDataSet.MESSAGESDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -817,7 +1407,7 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(_mds_whatsappDataSet.MessageDataTable dataTable) {
+        public virtual int Update(_mds_whatsappDataSet.MESSAGESDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
@@ -825,7 +1415,7 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual int Update(_mds_whatsappDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "Message");
+            return this.Adapter.Update(dataSet, "MESSAGES");
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -846,21 +1436,49 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(long Original_message_id, long Original_receiver_id, long Original_sender_id, string Original_message_content, System.TimeSpan Original_time) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((long)(Original_message_id));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((long)(Original_receiver_id));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((long)(Original_sender_id));
+            if ((Original_message_content == null)) {
+                throw new global::System.ArgumentNullException("Original_message_content");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_message_content));
+            }
+            this.Adapter.DeleteCommand.Parameters[4].Value = ((System.TimeSpan)(Original_time));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string Message, string Sender, int Time) {
-            if ((Message == null)) {
-                throw new global::System.ArgumentNullException("Message");
+        public virtual int Insert(long message_id, long receiver_id, long sender_id, string message_content, System.TimeSpan time) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((long)(message_id));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((long)(receiver_id));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((long)(sender_id));
+            if ((message_content == null)) {
+                throw new global::System.ArgumentNullException("message_content");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(Message));
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(message_content));
             }
-            if ((Sender == null)) {
-                throw new global::System.ArgumentNullException("Sender");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(Sender));
-            }
-            this.Adapter.InsertCommand.Parameters[2].Value = Time;
+            this.Adapter.InsertCommand.Parameters[4].Value = ((System.TimeSpan)(time));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -876,6 +1494,434 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
                 }
             }
         }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(long message_id, long receiver_id, long sender_id, string message_content, System.TimeSpan time, long Original_message_id, long Original_receiver_id, long Original_sender_id, string Original_message_content, System.TimeSpan Original_time) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((long)(message_id));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((long)(receiver_id));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((long)(sender_id));
+            if ((message_content == null)) {
+                throw new global::System.ArgumentNullException("message_content");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(message_content));
+            }
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((System.TimeSpan)(time));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((long)(Original_message_id));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((long)(Original_receiver_id));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((long)(Original_sender_id));
+            if ((Original_message_content == null)) {
+                throw new global::System.ArgumentNullException("Original_message_content");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_message_content));
+            }
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((System.TimeSpan)(Original_time));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(long receiver_id, long sender_id, string message_content, System.TimeSpan time, long Original_message_id, long Original_receiver_id, long Original_sender_id, string Original_message_content, System.TimeSpan Original_time) {
+            return this.Update(Original_message_id, receiver_id, sender_id, message_content, time, Original_message_id, Original_receiver_id, Original_sender_id, Original_message_content, Original_time);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class USERSTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public USERSTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "USERS";
+            tableMapping.ColumnMappings.Add("user_id", "user_id");
+            tableMapping.ColumnMappings.Add("display_name", "display_name");
+            tableMapping.ColumnMappings.Add("username", "username");
+            tableMapping.ColumnMappings.Add("password", "password");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[USERS] WHERE (([user_id] = @Original_user_id) AND ([display_na" +
+                "me] = @Original_display_name) AND ([username] = @Original_username) AND ([passwo" +
+                "rd] = @Original_password))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_user_id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "user_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_display_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "display_name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_username", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "username", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_password", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "password", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[USERS] ([user_id], [display_name], [username], [password]) VAL" +
+                "UES (@user_id, @display_name, @username, @password);\r\nSELECT user_id, display_na" +
+                "me, username, password FROM USERS WHERE (user_id = @user_id)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@user_id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "user_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@display_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "display_name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@username", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "username", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@password", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[USERS] SET [user_id] = @user_id, [display_name] = @display_name, [username] = @username, [password] = @password WHERE (([user_id] = @Original_user_id) AND ([display_name] = @Original_display_name) AND ([username] = @Original_username) AND ([password] = @Original_password));
+SELECT user_id, display_name, username, password FROM USERS WHERE (user_id = @user_id)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@user_id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "user_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@display_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "display_name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@username", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "username", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@password", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_user_id", global::System.Data.SqlDbType.BigInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "user_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_display_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "display_name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_username", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "username", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_password", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "password", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::mds_whatsapp.Properties.Settings.Default.mds_whatsappConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT user_id, display_name, username, password FROM dbo.USERS";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(_mds_whatsappDataSet.USERSDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual _mds_whatsappDataSet.USERSDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            _mds_whatsappDataSet.USERSDataTable dataTable = new _mds_whatsappDataSet.USERSDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(_mds_whatsappDataSet.USERSDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(_mds_whatsappDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "USERS");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(long Original_user_id, string Original_display_name, string Original_username, string Original_password) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((long)(Original_user_id));
+            if ((Original_display_name == null)) {
+                throw new global::System.ArgumentNullException("Original_display_name");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_display_name));
+            }
+            if ((Original_username == null)) {
+                throw new global::System.ArgumentNullException("Original_username");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_username));
+            }
+            if ((Original_password == null)) {
+                throw new global::System.ArgumentNullException("Original_password");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_password));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(long user_id, string display_name, string username, string password) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((long)(user_id));
+            if ((display_name == null)) {
+                throw new global::System.ArgumentNullException("display_name");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(display_name));
+            }
+            if ((username == null)) {
+                throw new global::System.ArgumentNullException("username");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(username));
+            }
+            if ((password == null)) {
+                throw new global::System.ArgumentNullException("password");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(password));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(long user_id, string display_name, string username, string password, long Original_user_id, string Original_display_name, string Original_username, string Original_password) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((long)(user_id));
+            if ((display_name == null)) {
+                throw new global::System.ArgumentNullException("display_name");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(display_name));
+            }
+            if ((username == null)) {
+                throw new global::System.ArgumentNullException("username");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(username));
+            }
+            if ((password == null)) {
+                throw new global::System.ArgumentNullException("password");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(password));
+            }
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((long)(Original_user_id));
+            if ((Original_display_name == null)) {
+                throw new global::System.ArgumentNullException("Original_display_name");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_display_name));
+            }
+            if ((Original_username == null)) {
+                throw new global::System.ArgumentNullException("Original_username");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_username));
+            }
+            if ((Original_password == null)) {
+                throw new global::System.ArgumentNullException("Original_password");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_password));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string display_name, string username, string password, long Original_user_id, string Original_display_name, string Original_username, string Original_password) {
+            return this.Update(Original_user_id, display_name, username, password, Original_user_id, Original_display_name, Original_username, Original_password);
+        }
     }
     
     /// <summary>
@@ -890,7 +1936,9 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
         
         private UpdateOrderOption _updateOrder;
         
-        private MessageTableAdapter _messageTableAdapter;
+        private MESSAGESTableAdapter _mESSAGESTableAdapter;
+        
+        private USERSTableAdapter _uSERSTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -912,12 +1960,26 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
             "a", "System.Drawing.Design.UITypeEditor")]
-        public MessageTableAdapter MessageTableAdapter {
+        public MESSAGESTableAdapter MESSAGESTableAdapter {
             get {
-                return this._messageTableAdapter;
+                return this._mESSAGESTableAdapter;
             }
             set {
-                this._messageTableAdapter = value;
+                this._mESSAGESTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public USERSTableAdapter USERSTableAdapter {
+            get {
+                return this._uSERSTableAdapter;
+            }
+            set {
+                this._uSERSTableAdapter = value;
             }
         }
         
@@ -940,9 +2002,13 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
                 if ((this._connection != null)) {
                     return this._connection;
                 }
-                if (((this._messageTableAdapter != null) 
-                            && (this._messageTableAdapter.Connection != null))) {
-                    return this._messageTableAdapter.Connection;
+                if (((this._mESSAGESTableAdapter != null) 
+                            && (this._mESSAGESTableAdapter.Connection != null))) {
+                    return this._mESSAGESTableAdapter.Connection;
+                }
+                if (((this._uSERSTableAdapter != null) 
+                            && (this._uSERSTableAdapter.Connection != null))) {
+                    return this._uSERSTableAdapter.Connection;
                 }
                 return null;
             }
@@ -957,7 +2023,10 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
-                if ((this._messageTableAdapter != null)) {
+                if ((this._mESSAGESTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._uSERSTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -971,12 +2040,21 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateUpdatedRows(_mds_whatsappDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._messageTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Message.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._uSERSTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.USERS.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._messageTableAdapter.Update(updatedRows));
+                    result = (result + this._uSERSTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._mESSAGESTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.MESSAGES.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._mESSAGESTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -990,11 +2068,19 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateInsertedRows(_mds_whatsappDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._messageTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Message.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._uSERSTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.USERS.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._messageTableAdapter.Update(addedRows));
+                    result = (result + this._uSERSTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._mESSAGESTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.MESSAGES.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._mESSAGESTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -1008,11 +2094,19 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateDeletedRows(_mds_whatsappDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._messageTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Message.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._mESSAGESTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.MESSAGES.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._messageTableAdapter.Update(deletedRows));
+                    result = (result + this._mESSAGESTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._uSERSTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.USERS.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._uSERSTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -1055,8 +2149,13 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
             if ((dataSet.HasChanges() == false)) {
                 return 0;
             }
-            if (((this._messageTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._messageTableAdapter.Connection) == false))) {
+            if (((this._mESSAGESTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._mESSAGESTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._uSERSTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._uSERSTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -1092,13 +2191,22 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
             try {
                 // ---- Prepare for update -----------
                 //
-                if ((this._messageTableAdapter != null)) {
-                    revertConnections.Add(this._messageTableAdapter, this._messageTableAdapter.Connection);
-                    this._messageTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._messageTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._messageTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._messageTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._messageTableAdapter.Adapter);
+                if ((this._mESSAGESTableAdapter != null)) {
+                    revertConnections.Add(this._mESSAGESTableAdapter, this._mESSAGESTableAdapter.Connection);
+                    this._mESSAGESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._mESSAGESTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._mESSAGESTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._mESSAGESTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._mESSAGESTableAdapter.Adapter);
+                    }
+                }
+                if ((this._uSERSTableAdapter != null)) {
+                    revertConnections.Add(this._uSERSTableAdapter, this._uSERSTableAdapter.Connection);
+                    this._uSERSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._uSERSTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._uSERSTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._uSERSTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._uSERSTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -1159,9 +2267,13 @@ namespace mds_whatsapp._mds_whatsappDataSetTableAdapters {
                 if (workConnOpened) {
                     workConnection.Close();
                 }
-                if ((this._messageTableAdapter != null)) {
-                    this._messageTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._messageTableAdapter]));
-                    this._messageTableAdapter.Transaction = null;
+                if ((this._mESSAGESTableAdapter != null)) {
+                    this._mESSAGESTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._mESSAGESTableAdapter]));
+                    this._mESSAGESTableAdapter.Transaction = null;
+                }
+                if ((this._uSERSTableAdapter != null)) {
+                    this._uSERSTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._uSERSTableAdapter]));
+                    this._uSERSTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
