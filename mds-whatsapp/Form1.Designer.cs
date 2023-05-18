@@ -39,12 +39,12 @@ namespace mds_whatsapp
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.button2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
             this.messageBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this._mds_whatsappDataSet = new mds_whatsapp._mds_whatsappDataSet();
             this.messageTableAdapter = new mds_whatsapp._mds_whatsappDataSetTableAdapters.MESSAGESTableAdapter();
             this.userTableAdapter = new mds_whatsapp._mds_whatsappDataSetTableAdapters.USERSTableAdapter();
             this.tableAdapterManager = new mds_whatsapp._mds_whatsappDataSetTableAdapters.TableAdapterManager();
-            this.button3 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.messageBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._mds_whatsappDataSet)).BeginInit();
@@ -52,40 +52,47 @@ namespace mds_whatsapp
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(437, 346);
+            this.button1.Location = new System.Drawing.Point(583, 426);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(80, 28);
+            this.button1.Size = new System.Drawing.Size(107, 34);
             this.button1.TabIndex = 0;
             this.button1.Text = "Send";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.MouseEnter += new System.EventHandler(this.button1_MouseEnter);
+            this.button1.MouseLeave += new System.EventHandler(this.button1_MouseLeave);
             // 
             // textBox
             // 
-            this.textBox.Location = new System.Drawing.Point(132, 346);
+            this.textBox.Location = new System.Drawing.Point(176, 426);
+            this.textBox.Margin = new System.Windows.Forms.Padding(4);
             this.textBox.MaxLength = 50;
             this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(299, 20);
+            this.textBox.Size = new System.Drawing.Size(397, 22);
             this.textBox.TabIndex = 1;
             // 
             // panel1
             // 
             this.panel1.AutoScroll = true;
-            this.panel1.Location = new System.Drawing.Point(132, 12);
+            this.panel1.Location = new System.Drawing.Point(176, 15);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(385, 328);
+            this.panel1.Size = new System.Drawing.Size(513, 404);
             this.panel1.TabIndex = 2;
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(18, 300);
+            this.button2.Location = new System.Drawing.Point(24, 369);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(80, 28);
+            this.button2.Size = new System.Drawing.Size(107, 34);
             this.button2.TabIndex = 3;
             this.button2.Text = "Empty";
             this.button2.UseVisualStyleBackColor = true;
@@ -96,10 +103,22 @@ namespace mds_whatsapp
             this.panel2.AutoScroll = true;
             this.panel2.Controls.Add(this.button3);
             this.panel2.Controls.Add(this.button2);
-            this.panel2.Location = new System.Drawing.Point(12, 12);
+            this.panel2.Location = new System.Drawing.Point(16, 15);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(114, 354);
+            this.panel2.Size = new System.Drawing.Size(152, 436);
             this.panel2.TabIndex = 3;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(24, 327);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(107, 34);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "Load";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.load_conversation);
             // 
             // messageBindingSource
             // 
@@ -114,41 +133,35 @@ namespace mds_whatsapp
             // messageTableAdapter
             // 
             this.messageTableAdapter.ClearBeforeFill = true;
+            // 
+            // userTableAdapter
+            // 
             this.userTableAdapter.ClearBeforeFill = true;
             // 
             // tableAdapterManager
             // 
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
             this.tableAdapterManager.MESSAGESTableAdapter = this.messageTableAdapter;
-            this.tableAdapterManager.USERSTableAdapter = this.userTableAdapter;
             this.tableAdapterManager.UpdateOrder = mds_whatsapp._mds_whatsappDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(18, 266);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(80, 28);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Load";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.load_conversation);
+            this.tableAdapterManager.USERSTableAdapter = this.userTableAdapter;
             // 
             // Form1
             // 
             this.AcceptButton = this.button1;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(529, 386);
+            this.ClientSize = new System.Drawing.Size(705, 475);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.textBox);
             this.Controls.Add(this.button1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Whatsapp";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.messageBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._mds_whatsappDataSet)).EndInit();
+           // ((System.ComponentModel.ISupportInitialize)(this.messageBindingSource)).EndInit();
+           // ((System.ComponentModel.ISupportInitialize)(this._mds_whatsappDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

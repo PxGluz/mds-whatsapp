@@ -58,8 +58,8 @@ namespace mds_whatsapp
         private void Form1_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the '_mds_whatsappDataSet.Message' table. You can move, or remove it, as needed.
-            this.messageTableAdapter.Fill(this._mds_whatsappDataSet.MESSAGES);
-            this.userTableAdapter.Fill(this._mds_whatsappDataSet.USERS);
+           // this.messageTableAdapter.Fill(this._mds_whatsappDataSet.MESSAGES);
+            //this.userTableAdapter.Fill(this._mds_whatsappDataSet.USERS);
         }
 
         private void messageBindingNavigatorSaveItem_Click(object sender, EventArgs e)
@@ -86,6 +86,16 @@ namespace mds_whatsapp
                 panel1.Controls.Add(message);
                 this.textBox.Text = "";
             }*/
+        }
+
+        private void button1_MouseEnter(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.Red;
+        }
+
+        private void button1_MouseLeave(object sender, EventArgs e)
+        {
+            button1.BackColor = Color.White;
         }
     }
 }
