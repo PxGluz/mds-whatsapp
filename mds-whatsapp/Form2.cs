@@ -49,16 +49,30 @@ namespace mds_whatsapp
                 SqlDataReader r = cmd.ExecuteReader();
                 if(r.Read())
                 {
+                    Form1.nume = textBox1.Text;
                     MessageBox.Show("Logare efectuata cu succes!");
                     Form1 f = new Form1();
                     f.Show();
-                    this.Hide();
+                    textBox1.Hide();
+                    textBox2.Hide();
+                    button1.Hide();
+                    button2.Hide();
+                    label1.Text = "Bune ai revenit, " + Form1.nume + "!";
+                    label2.Hide();
+                    label3.Hide();
                 }else
                 {
                     MessageBox.Show("Utilizatorul nu exista in baza de date!");
                 }
                 c.Close();
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form3 f = new Form3();
+            f.Show();
+            
         }
     }
 }
