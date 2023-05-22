@@ -13,7 +13,7 @@ namespace mds_whatsapp
 {
     public partial class Form3 : Form
     {
-        SqlConnection c = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\user\OneDrive\Documente\GitHub\mds-whatsapp\mds-whatsapp\Database1.mdf;Integrated Security=True");
+        SqlConnection c = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\Database1.mdf;Integrated Security=True");
         public Form3()
         {
             InitializeComponent();

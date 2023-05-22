@@ -42,3 +42,7 @@ C:\Users\user\OneDrive\Documente\GitHub\mds-whatsapp\mds-whatsapp\obj\Debug\mds_
 C:\Users\user\OneDrive\Documente\GitHub\mds-whatsapp\mds-whatsapp\bin\Debug\Database1.mdf
 C:\Users\user\OneDrive\Documente\GitHub\mds-whatsapp\mds-whatsapp\bin\Debug\Database1_log.ldf
 C:\Users\user\OneDrive\Documente\GitHub\mds-whatsapp\mds-whatsapp\obj\Debug\mds_whatsapp.Form3.resources
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\bin\Debug\Database1.mdf
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\bin\Debug\Database1_log.ldf
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\obj\Debug\mds_whatsapp.Form2.resources
+C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\obj\Debug\mds_whatsapp.Form3.resources

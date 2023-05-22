@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
@@ -13,7 +6,7 @@ namespace mds_whatsapp
 {
     public partial class Form2 : Form
     {
-        SqlConnection c = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\user\OneDrive\Documente\GitHub\mds-whatsapp\mds-whatsapp\Database1.mdf;Integrated Security=True");
+        SqlConnection c = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\user\source\repos\mds-whatsapp\mds-whatsapp\Database1.mdf;Integrated Security=True");
         public Form2()
         {
             InitializeComponent();
@@ -49,7 +42,7 @@ namespace mds_whatsapp
                 SqlDataReader r = cmd.ExecuteReader();
                 if(r.Read())
                 {
-                    Form1.nume = textBox1.Text;
+                    Form1.nume = r[0].ToString();
                     MessageBox.Show("Logare efectuata cu succes!");
                     Form1 f = new Form1();
                     f.Show();
