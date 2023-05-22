@@ -7,9 +7,11 @@ using System.Windows.Forms;
 
 namespace mds_whatsapp
 {
-    
+
+
     public partial class Form1 : Form
     {
+        string key = "b14ca5898a4e4133bbce2ea2315a1916";
         public static bool pornit = true;
         public string var, var1;
         public static string nume;
@@ -30,7 +32,7 @@ namespace mds_whatsapp
                     SqlCommand cmd = new SqlCommand(insert, c);
                     cmd.Parameters.AddWithValue("a", nume);
                     cmd.Parameters.AddWithValue("b", label3.Text);
-                    cmd.Parameters.AddWithValue("c", textBox.Text);
+                    cmd.Parameters.AddWithValue("c", Encrypter.EncryptString(key, textBox.Text));
                     cmd.Parameters.AddWithValue("d", DateTime.Now);
                     cmd.ExecuteNonQuery();
                     c.Close();
@@ -130,7 +132,7 @@ namespace mds_whatsapp
                 while (r.Read())
                 {
                     RichTextBox message = new RichTextBox();
-                    message.Text = r[1].ToString() + ": " + r[0].ToString();
+                    message.Text = r[1].ToString() + ": " + Encrypter.DecryptString(key, r[0].ToString());
                     int yPos = messageList.Count() > 0 ? messageList[messageList.Count() - 1].Location.Y + messageList[messageList.Count() - 1].Size.Height + 5 : 12;
                     message.Location = new System.Drawing.Point(r[1].ToString() == nume ? 350 - TextRenderer.MeasureText(message.Text, message.Font).Width : 0, yPos);
                     message.Name = $"richTextBox{messageList.Count()}";
@@ -164,7 +166,7 @@ namespace mds_whatsapp
                 while (r.Read())
                 {
                     RichTextBox message = new RichTextBox();
-                    message.Text = r[1].ToString() + ": " + r[0].ToString();
+                    message.Text = r[1].ToString() + ": " + Encrypter.DecryptString(key, r[0].ToString());
                     int yPos = messageList.Count() > 0 ? messageList[messageList.Count() - 1].Location.Y + messageList[messageList.Count() - 1].Size.Height + 5 : 12;
                     message.Location = new System.Drawing.Point(r[1].ToString() == nume ? 350 - TextRenderer.MeasureText(message.Text, message.Font).Width : 0, yPos);
                     message.Name = $"richTextBox{messageList.Count()}";
